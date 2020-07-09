@@ -1,3 +1,5 @@
-export const generateMd = text => {
-    let text = `${text.title}`
+const generateMd = content => {
+    let text = `${content.title}`
 }
+
+module.exports = { generateMd }
