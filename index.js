@@ -1,27 +1,15 @@
-const { generateMd } = require('./utils/generateMarkdown')
+const { generateMd, writeToFile } = require('./utils/generateMarkdown')
 const questions = require('./src/questions.js')
 const { prompt } = require('inquirer')
 
-// array of questions for user
-const ask = questions => {
-    prompt(questions)
-        .then(answers => {
-            console.log(answers)
-        })
-        .catch(error => {
-            if (error.isTtyError) {
-                // Prompt couldn't be rendered in the current environment
-            } else {
-                // Something else when wrong
-            }
+const ask = q => {
+    prompt(q)
+        .then(a => writeToFile('README.md', generateMd(a)))
+        .catch(e => {
+            throw new Error(e)
         })
 }
 
-// function to write README file
-function writeToFile(fileName, data) {}
-
-// function to initialize program
 const init = () => ask(questions)
 
-// function call to initialize program
 init()

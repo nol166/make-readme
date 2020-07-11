@@ -1,5 +1,21 @@
-const generateMd = content => {
-    let text = `${content.title}`
+class generateMd {
+    renderLicenseBadge = license =>
+        license !== 'none'
+            ? `![GitHub license](https://img.shields.io/badge/license-${license}-blue.svg)`
+            : ''
+
+    renderLicenseLink = license =>
+        license === 'none' ? `\n* [License](#license)\n` : ''
+
+    renderLicenseSection = license =>
+        license === 'none'
+            ? `## License
+  
+  This project is licensed under the ${license} license.`
+            : ''
 }
 
-module.exports = { generateMd }
+const writeToFile = (fileName, data) =>
+    fs.writeFileSync(path.join(process.cwd(), fileName), data)
+
+module.exports = { generateMd, writeToFile }
