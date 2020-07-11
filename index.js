@@ -1,13 +1,15 @@
-import { generateMd } from 'module'
+const { generateMd, writeToFile } = require('./utils/generateMarkdown')
+const questions = require('./src/questions.js')
+const { prompt } = require('inquirer')
 
-// array of questions for user
-const questions = []
+const ask = q => {
+    prompt(q)
+        .then(a => writeToFile('README.md', generateMd(a)))
+        .catch(e => {
+            throw new Error(e)
+        })
+}
 
-// function to write README file
-function writeToFile(fileName, data) {}
+const init = () => ask(questions)
 
-// function to initialize program
-function init() {}
-
-// function call to initialize program
 init()
